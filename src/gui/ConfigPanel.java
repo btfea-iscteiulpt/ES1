@@ -10,6 +10,8 @@ import utils.TableFileBuildBehavior;
 
 public class ConfigPanel extends JPanel {
 private BuildBehavior behavior;
+private boolean editable;
+private UserMenu menu;
 
 	/**
 	 * 
@@ -17,10 +19,16 @@ private BuildBehavior behavior;
 	private static final long serialVersionUID = -5973344758120539378L;
 
 	public ConfigPanel(File path,boolean editable) {
-		content(path,editable);
+		this.editable=editable;
+		content(path);
 	}
 	
-	public void content(File path,boolean editable){
+	public ConfigPanel(boolean editable,UserMenu menu){
+		this.editable=editable;
+		this.menu=menu;
+	}
+	
+	public void content(File path){
 		behavior = new TableFileBuildBehavior();
 		JPanel left = new JPanel();
 		left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
@@ -33,7 +41,6 @@ private BuildBehavior behavior;
 		this.add(left);
 		JTextArea evaluation = new JTextArea("[Add evaluation]");
 		this.add(evaluation);
-				
 	}
 	
 	private JLabel config(boolean b){

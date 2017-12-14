@@ -1,24 +1,34 @@
 package gui;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.*;
 
 
 public class UserMenu { 
-	private File path;
+	private Map<String, Integer> regras = new HashMap<String, Integer>();
+	private JPanel manual_config;
+	private JPanel auto_config;
+	private JFrame frame;
+	List<File> file_list = new ArrayList<File>();
+	
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e){
 			e.printStackTrace();
 		}
-		new UserMenu("c:/users/Miguel/downloads/rules.cf").gui();
+	//	new UserMenu("c:/users/Miguel/downloads/rules.cf").init();
+		new UserMenu().init();
 	}
 	
-	public UserMenu(String p) {
-		path=buildPath(p);
+	public UserMenu() {
 	}
+	
 	
 	void init(){
 		SwingUtilities.invokeLater(new Runnable() {
@@ -30,27 +40,48 @@ public class UserMenu {
 		});
 	}
 	
-	public File buildPath(String path){
-		System.out.println("okay");
-		return new File(path);
-	}
 
 	public void gui(){
-		JFrame frame = new JFrame();
+		frame = new JFrame("Anti-Spam Filtering");
 		frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel files_config = new TopPanel();
+		JPanel files_config = new TopPanel(this);
+		
+		manual_config = new ConfigPanel(true,this);
+		manual_config.setVisible(false);
+		
+		auto_config = new ConfigPanel(false,this);
+		auto_config.setVisible(false);
+				
 		frame.add(files_config);
-		
-		JPanel manual_config = new ConfigPanel(path,true);
 		frame.add(manual_config);
-		
-		JPanel auto_config = new ConfigPanel(path,false);
 		frame.add(auto_config);
 		
-		
+		frame.setLocationRelativeTo(null);
 		frame.pack();
 		frame.setVisible(true);
 	}
+	
+	public JPanel getManual_config() {
+		return manual_config;
+	}
+	
+	public JFrame getFrame() {
+		return frame;
+	}
+	
+	public JPanel getAuto_config() {
+		return auto_config;
+	}
+	
+	public void fillTables(File f){
+			((ConfigPanel)auto_config).content(f);
+			((ConfigPanel)manual_config).content(f);
+	}
+	
+	public List<File> getFile_list() {
+		return file_list;
+	}
+	
 }
