@@ -48,10 +48,10 @@ public class UserMenu {
 		
 		JPanel files_config = new TopPanel(this);
 		
-		manual_config = new ConfigPanel(true,this);
+		manual_config = new ConfigPanel(true);
 		manual_config.setVisible(false);
 		
-		auto_config = new ConfigPanel(false,this);
+		auto_config = new ConfigPanel(false);
 		auto_config.setVisible(false);
 				
 		frame.add(files_config);

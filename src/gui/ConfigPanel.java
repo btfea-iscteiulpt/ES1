@@ -11,7 +11,6 @@ import utils.TableFileBuildBehavior;
 public class ConfigPanel extends JPanel {
 private BuildBehavior behavior;
 private boolean editable;
-private UserMenu menu;
 
 	/**
 	 * 
@@ -23,9 +22,8 @@ private UserMenu menu;
 		content(path);
 	}
 	
-	public ConfigPanel(boolean editable,UserMenu menu){
+	public ConfigPanel(boolean editable){
 		this.editable=editable;
-		this.menu=menu;
 	}
 	
 	public void content(File path){
