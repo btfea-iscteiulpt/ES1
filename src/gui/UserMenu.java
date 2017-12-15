@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
+import utils.RulesEvaluation;
+
 
 public class UserMenu { 
 	private JPanel manual_config;

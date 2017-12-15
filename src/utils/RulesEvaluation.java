@@ -29,8 +29,8 @@ public class RulesEvaluation {
 			while (s.hasNextLine()) {
 				double count=0;
 				String [] a = s.nextLine().split(" ");
-				for (int i =1 ; i<a.length; i++){
-				//	count += ConfigPanel.getRegras().get(a[i]);
+				for (int i = 1 ; i<a.length; i++) {
+					count += ConfigPanel.getRegras().get(a[i]);
 				}
 				if (count > threshold)
 					spam++;
