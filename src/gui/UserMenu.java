@@ -2,19 +2,15 @@ package gui;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.swing.*;
 
 
 public class UserMenu { 
-	private Map<String, Integer> regras = new HashMap<String, Integer>();
 	private JPanel manual_config;
 	private JPanel auto_config;
 	private JFrame frame;
-	List<File> file_list = new ArrayList<File>();
+	private List<File> file_list = new ArrayList<File>();
 	
 	public static void main(String[] args) {
 		try {
@@ -25,10 +21,6 @@ public class UserMenu {
 	//	new UserMenu("c:/users/Miguel/downloads/rules.cf").init();
 		new UserMenu().init();
 	}
-	
-	public UserMenu() {
-	}
-	
 	
 	void init(){
 		SwingUtilities.invokeLater(new Runnable() {

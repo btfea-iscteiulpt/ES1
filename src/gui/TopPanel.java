@@ -49,7 +49,7 @@ public class TopPanel extends JPanel {
 		this.add(files);
 	}
 
-	public JPanel leftpanel() {
+	private JPanel leftpanel() {
 		JPanel pane = new JPanel();
 		pane.setLayout(new GridLayout(2, 0));
 		pane.add(new JLabel("Caminho para os ficheiros"));
@@ -80,6 +80,7 @@ public class TopPanel extends JPanel {
 			this.type = type;
 		}
 
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String text = field.getText().trim();
@@ -88,8 +89,8 @@ public class TopPanel extends JPanel {
 				if (f.exists() && !f.isDirectory()) {
 					if (type == 0)
 						menu.fillTables(f);
-					else
-						menu.getFile_list().add(f);
+					else // convém verificar se acaba em spam.log ou ham.log para garantir que é o file correto
+						menu.getFile_list().add(f); 
 					field.setEnabled(false);
 				} else
 					JOptionPane.showMessageDialog(menu.getFrame(), "Caminho especificado não encontrado.");

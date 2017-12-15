@@ -9,7 +9,7 @@ import utils.BuildBehavior;
 import utils.TableFileBuildBehavior;
 
 public class ConfigPanel extends JPanel {
-private BuildBehavior behavior;
+private BuildBehavior behavior= new TableFileBuildBehavior();
 private boolean editable;
 
 	/**
@@ -17,17 +17,12 @@ private boolean editable;
 	 */
 	private static final long serialVersionUID = -5973344758120539378L;
 
-	public ConfigPanel(File path,boolean editable) {
-		this.editable=editable;
-		content(path);
-	}
 	
 	public ConfigPanel(boolean editable){
 		this.editable=editable;
 	}
 	
 	public void content(File path){
-		behavior = new TableFileBuildBehavior();
 		JPanel left = new JPanel();
 		left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
 		JTable table = (JTable) behavior.init(path,editable);
@@ -41,7 +36,7 @@ private boolean editable;
 		this.add(evaluation);
 	}
 	
-	private JLabel config(boolean b){
+	private static JLabel config(boolean b){
 		String s;
 		if(b)
 			s="Configuração manual";
@@ -50,7 +45,7 @@ private boolean editable;
 			return new JLabel(s);
 		}
 	
-	private JPanel labels(){
+	private static JPanel labels(){
 		JPanel pane = new JPanel();
 		pane.add(new JLabel("FP = "));
 		pane.add(new JLabel("FN = "));
