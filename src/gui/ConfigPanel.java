@@ -9,7 +9,6 @@ import utils.BuildBehavior;
 import utils.TableFileBuildBehavior;
 
 public class ConfigPanel extends JPanel {
-private BuildBehavior behavior= new TableFileBuildBehavior();
 private boolean editable;
 
 	/**
@@ -23,6 +22,7 @@ private boolean editable;
 	}
 	
 	public void content(File path){
+		BuildBehavior behavior= new TableFileBuildBehavior();
 		JPanel left = new JPanel();
 		left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
 		JTable table = (JTable) behavior.init(path,editable);
