@@ -27,9 +27,11 @@ public class RulesEvaluation {
 			s = new Scanner(f); 
 			while (s.hasNextLine()) {
 				double count=0;
-				String [] a = s.nextLine().split(" ");
-				for (int i = 1 ; i<a.length; i++) {
-					count += ConfigPanel.getRegras().get(a[i]);
+				String a = s.nextLine();
+				String[] b = a.split("\\s");
+				for (int i = 1 ; i < b.length; i++) {
+					if (ConfigPanel.getRegras().containsKey(b[i]))
+						count += ConfigPanel.getRegras().get(b[i]);
 				}
 				if (count > THRESHOLD)
 					spam++;

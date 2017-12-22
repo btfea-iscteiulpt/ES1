@@ -69,8 +69,8 @@ private boolean editable;
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < table.getRowCount(); i++)
 					regras.put((String) table.getValueAt(i, 0), (int) table.getValueAt(i, 1));
-					fp.setText("FP = " + RulesEvaluation.FileScanner(new File("ham.log.txt")));
-					fn.setText("FN = " + RulesEvaluation.FileScanner(new File("spam.log.txt")));
+				fp.setText("FP = " + RulesEvaluation.FileScanner(new File("ham.log.txt")));
+				fn.setText("FN = " + RulesEvaluation.FileScanner(new File("spam.log.txt")));
 			}
 		});
 		this.add(button);
