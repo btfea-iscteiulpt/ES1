@@ -31,10 +31,10 @@ public final class RulesEvaluation {
 					if (panel.getRegras().containsKey(b[i]))
 						count += panel.getRegras().get(b[i]);
 				}
-				if (count > THRESHOLD)
-					spam++;
-				else 
+				if (count <= THRESHOLD && count>= (-THRESHOLD))
 					notSpam++;
+				else 
+					spam++;
 			}
 			
 		} catch (FileNotFoundException  e) {
