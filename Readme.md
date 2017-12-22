@@ -1,9 +1,13 @@
-IdentificaÃ§Ã£o da turma (ex: EIC1)
+Identificação da turma: IC1
 
-IdentificaÃ§Ã£o do grupo (ex: Grupo 2)
+Identificação do grupo: Grupo 63
 
-IdentificaÃ§Ã£o do nÃºmero, nome e papel de cada membro do grupo (ex: 12345, JosÃ© Silva, Scrum Master)
+Identificação do número, nome e papel de cada membro do grupo:
+	73198- Beatriz Fonte, SCRUM Master;
+	73137- Miguel Henriques, Developer;
+	72774- Gonçalo Santos, Developer;
+	73612- Mariana Cardoso, Quality Manager.
 
-IdentificaÃ§Ã£o da variante do projeto desenvolvida (ex: AntiSpamConfigurationForProfessionalMailbox)
+Identificação da variante do projeto desenvolvida: AntiSpamConfigurationForBalancedProfessionalAndLeisureMailBox
 
-Link para um vÃ­deo no youtube com a demonstraÃ§Ã£o da aplicaÃ§Ã£o final desenvolvida (ex: http://...)
+Link para o vídeo no youtube com a demonstração da aplicação final desenvolvida: (Adicionar).

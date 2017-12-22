@@ -9,12 +9,11 @@ import gui.ConfigPanel;
  * Usado para cálculo dos FP's e FN's. Só deve ser criado quando o ficheiro rules já está preenchido com
  * os pesos para uma certa configuração. Sempre que é carregada uma nova configuração deve ser criado outro
  * objeto deste tipo.
- * @author Miguel
  *
  */
 public class RulesEvaluation {
 
-	private static int threshold = 5;
+	private static final int THRESHOLD = 5;
 	
 	/**
 	 * Lê o ficheiro ham/spam e define se é spam ou não com base no que está no hashmap de regra/peso.
@@ -32,7 +31,7 @@ public class RulesEvaluation {
 				for (int i = 1 ; i<a.length; i++) {
 					count += ConfigPanel.getRegras().get(a[i]);
 				}
-				if (count > threshold)
+				if (count > THRESHOLD)
 					spam++;
 				else 
 					notSpam++;

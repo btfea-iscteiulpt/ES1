@@ -10,6 +10,8 @@ private Integer value;
 private String rule;
 
 public Rule(String rule) {
+	if(rule==null)
+		throw new IllegalArgumentException();
 	value= 0;
 	this.rule=rule;
 }

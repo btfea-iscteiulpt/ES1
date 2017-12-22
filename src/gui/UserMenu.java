@@ -5,15 +5,18 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
-import utils.RulesEvaluation;
 
-
+/**
+ * Cria o menu com o qual o utilizador pode interagir(escolher caminho dos ficheiros, 
+ * escolher a configuração,etc.).
+ *
+ */
 public class UserMenu { 
 	private JPanel manual_config;
 	private JPanel auto_config;
-	private JFrame frame;
+	private JFrame frame = new JFrame("Anti-Spam Filtering");
 	private List<File> file_list = new ArrayList<File>();
-	
+
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -24,7 +27,10 @@ public class UserMenu {
 		new UserMenu().init();
 	}
 	
-	void init(){
+	/**
+	 * Arranca o método GUI que constrói a janela e mostra-a no ecrã.
+	 */
+	public void init(){
 		SwingUtilities.invokeLater(new Runnable() {
 			
 			@Override
@@ -34,13 +40,15 @@ public class UserMenu {
 		});
 	}
 	
-
-	public void gui(){
-		frame = new JFrame("Anti-Spam Filtering");
+	/**
+	 * Constrói a janela do utilizador e faz o display da mesma.
+	 */
+	private void gui(){
 		frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JPanel files_config = new TopPanel(this);
+		TopPanel files_config = new TopPanel(this);
+		files_config.addContent();
 		
 		manual_config = new ConfigPanel(true);
 		manual_config.setVisible(false);
@@ -57,23 +65,45 @@ public class UserMenu {
 		frame.setVisible(true);
 	}
 	
+	/**
+	 * Getter do painel de configuração manual.
+	 * @return NULL caso ainda não tenha sido criada a janela.
+	 */
 	public JPanel getManual_config() {
 		return manual_config;
 	}
 	
+	/**
+	 * Getter da frame sobre a qual estão construidos os JComponents restantes.
+	 * @return NULL caso ainda não tenha sido criada a janela.
+	 */
 	public JFrame getFrame() {
 		return frame;
 	}
 	
+	/**
+	 * Getter do painel de configuração automática.
+	 * @return NULL caso ainda não tenha sido criada a janela.
+	 */
 	public JPanel getAuto_config() {
 		return auto_config;
 	}
 	
+	/**
+	 * Preenche ambas as tabelas de configuração com base no contéudo do ficheiro.
+	 * @param f Ficheiro a ser utilizado para preencher as tabelas.
+	 */
 	public void fillTables(File f){
+		if(f==null)
+			throw new IllegalArgumentException();
 			((ConfigPanel)auto_config).content(f);
 			((ConfigPanel)manual_config).content(f);
 	}
 	
+	/**
+	 * Getter da lista de ficheiros que são utilizados durante o funcionmanento da aplicação.
+	 * @return
+	 */
 	public List<File> getFile_list() {
 		return file_list;
 	}

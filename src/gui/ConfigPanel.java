@@ -13,6 +13,10 @@ import utils.BuildBehavior;
 import utils.RulesEvaluation;
 import utils.TableFileBuildBehavior;
 
+/**
+ * Subclasse de JPanel usada nas configurações automática e manual.
+ *
+ */
 public class ConfigPanel extends JPanel {
 private boolean editable;
 
@@ -27,15 +31,26 @@ private boolean editable;
 		return regras;
 	}
 	
+	/**
+	 * Construtor da classe ConfigPanel.
+	 * @param editable booleano que indica se a coluna de pesos poderá ser alterada.
+	 */
 	public ConfigPanel(boolean editable){
 		this.editable=editable;
 	}
 	
+	/**
+	 * Constrói e mostra no ecrá o contéudo do painel, incluindo a tabela da configuração que é preenchida
+	 * com base no ficheiro dado nos argumentos.
+	 * @param path Ficheiro a partir do qual se vai preencher a tabela de configuração.
+	 */
 	public void content(File path){
+		if(path==null)
+			throw new IllegalArgumentException();
 		BuildBehavior behavior= new TableFileBuildBehavior();
+		JTable table = (JTable) behavior.init(path,editable);
 		JPanel left = new JPanel();
 		left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
-		JTable table = (JTable) behavior.init(path,editable);
 		table.setPreferredScrollableViewportSize(new Dimension(table.getPreferredSize().width,table.getRowHeight()*5));
 		JScrollPane scroll = new JScrollPane(table);
 		left.add(config(editable));
@@ -58,9 +73,15 @@ private boolean editable;
 					fn.setText("FN = " + RulesEvaluation.FileScanner(new File("spam.log.txt")));
 			}
 		});
-		this.add(button);	
+		this.add(button);
 	}
 	
+	/**
+	 * Cria label com o nome da configuração escolhida.
+	 * @param b True para configuração manual. False para configuração automática.
+	 * 
+	 * @return
+	 */
 	private static JLabel config(boolean b){
 		String s;
 		if(b)
@@ -69,5 +90,6 @@ private boolean editable;
 			s="Configuração automática";
 			return new JLabel(s);
 		}
+	
 	
 }

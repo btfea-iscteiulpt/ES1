@@ -10,7 +10,7 @@ public class TableFileBuildBehavior implements BuildBehavior {
 	
 	
 	@Override
-	public Object init(Object o,boolean editable) {
+	public Object init(Object o,boolean editable) {		
 		DefaultTableModel model;
 		try {
 			model = new MyTableModel(editable);
@@ -25,6 +25,6 @@ public class TableFileBuildBehavior implements BuildBehavior {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		throw new IllegalArgumentException();
 	}
 }

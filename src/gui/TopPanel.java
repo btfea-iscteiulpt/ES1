@@ -7,6 +7,11 @@ import java.io.File;
 
 import javax.swing.*;
 
+/**
+ * Painel no topo do menu. É este painel que permite definir os caminhos para os
+ * ficheiros bem como alterar a configuração a ser utilizada dinamicamente.
+ *
+ */
 public class TopPanel extends JPanel {
 	private UserMenu menu;
 
@@ -15,18 +20,18 @@ public class TopPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public TopPanel() {
-		this.setLayout(new GridLayout(0, 2));
-		addContent();
-	}
-
 	public TopPanel(UserMenu menu) {
-		this.menu = menu;
-		this.setLayout(new GridLayout(0, 2));
-		addContent();
+		if (menu == null)
+			throw new IllegalArgumentException();
+		else
+			this.menu = menu;
 	}
 
-	private void addContent() {
+	/**
+	 * Adiciona o contéudo a ser visualizado ao painel.
+	 */
+	public void addContent() {
+		this.setLayout(new GridLayout(0, 2));
 		JPanel files = new JPanel();
 		files.setLayout(new GridLayout(0, 2, 10, 3));
 		JLabel spam = new JLabel("spam.log", SwingConstants.RIGHT);
@@ -49,6 +54,11 @@ public class TopPanel extends JPanel {
 		this.add(files);
 	}
 
+	/**
+	 * Subpainel representativo do lado esquerdo do painel principal.
+	 * 
+	 * @return
+	 */
 	private JPanel leftpanel() {
 		JPanel pane = new JPanel();
 		pane.setLayout(new GridLayout(2, 0));
@@ -71,15 +81,21 @@ public class TopPanel extends JPanel {
 		return pane;
 	}
 
-	public class PathListener implements ActionListener {
+	/**
+	 * Sentinela que escuta por eventos despoletados pelo user quando este
+	 * insere algo nas caixas de texto dos ficheiros e pressiona ENTER.
+	 *
+	 */
+	private class PathListener implements ActionListener {
 		private JTextField field;
 		private int type;
 
 		public PathListener(JTextField field, int type) {
+			if(field==null)
+				throw new IllegalArgumentException();
 			this.field = field;
 			this.type = type;
 		}
-
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -89,8 +105,9 @@ public class TopPanel extends JPanel {
 				if (f.exists() && !f.isDirectory()) {
 					if (type == 0)
 						menu.fillTables(f);
-					else // convém verificar se acaba em spam.log ou ham.log para garantir que é o file correto
-						menu.getFile_list().add(f); 
+					else // convém verificar se acaba em spam.log ou ham.log
+							// para garantir que é o file correto
+						menu.getFile_list().add(f);
 					field.setEnabled(false);
 				} else
 					JOptionPane.showMessageDialog(menu.getFrame(), "Caminho especificado não encontrado.");
@@ -98,10 +115,19 @@ public class TopPanel extends JPanel {
 		}
 	}
 
-	public class OptionListener implements ActionListener {
+	/**
+	 * Sentinela que escuta pela interação do utilizador na selecção da
+	 * configuração a ser utilizada. É possível o utilizador alterar a
+	 * configuração a ser utilizada dinamicamente porém apenas uma configuração
+	 * pode ser utilizada de cada vez.
+	 *
+	 */
+	private class OptionListener implements ActionListener {
 		private String type;
 
 		public OptionListener(String type) {
+			if (type == null)
+				throw new IllegalArgumentException("Configuration option unrecognized.");
 			this.type = type;
 		}
 
@@ -113,10 +139,8 @@ public class TopPanel extends JPanel {
 			} else if (type.equals("manual")) {
 				menu.getManual_config().setVisible(true);
 				menu.getAuto_config().setVisible(false);
-			} else
-				throw new IllegalArgumentException("Configuration option unrecognized.");
-			menu.getFrame().pack();
+				menu.getFrame().pack();
+			}
 		}
-
 	}
 }
