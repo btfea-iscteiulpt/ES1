@@ -6,8 +6,10 @@ import java.util.Scanner;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Implementa o comportamento de construção para tabelas.
+ */
 public class TableFileBuildBehavior implements BuildBehavior {
-	
 	
 	@Override
 	public Object init(Object o,boolean editable) {		

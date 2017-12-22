@@ -1,4 +1,4 @@
-package gui_tests;
+package jUnitTests;
 
 import static org.junit.Assert.*;
 
@@ -30,4 +30,6 @@ UserMenu menu= new UserMenu();
 	public final void testGetFile_list() {
 		assertEquals(0,menu.getFile_list().size());
 	}
+	
+	
 }

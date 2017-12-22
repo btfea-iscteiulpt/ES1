@@ -17,6 +17,7 @@ public class UserMenu {
 	private JFrame frame = new JFrame("Anti-Spam Filtering");
 	private List<File> file_list = new ArrayList<File>();
 
+	
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -25,7 +26,7 @@ public class UserMenu {
 		}
 	//	new UserMenu("c:/users/Miguel/downloads/rules.cf").init();
 		new UserMenu().init();
-	}
+	} 
 	
 	/**
 	 * Arranca o método GUI que constrói a janela e mostra-a no ecrã.
@@ -50,10 +51,10 @@ public class UserMenu {
 		TopPanel files_config = new TopPanel(this);
 		files_config.addContent();
 		
-		manual_config = new ConfigPanel(true);
+		manual_config = new ConfigPanel(true,this);
 		manual_config.setVisible(false);
 		
-		auto_config = new ConfigPanel(false);
+		auto_config = new ConfigPanel(false,this);
 		auto_config.setVisible(false);
 				
 		frame.add(files_config);
@@ -102,10 +103,19 @@ public class UserMenu {
 	
 	/**
 	 * Getter da lista de ficheiros que são utilizados durante o funcionmanento da aplicação.
-	 * @return
+	 * @return Lista de ficheiros existente.
 	 */
 	public List<File> getFile_list() {
 		return file_list;
+	}
+	
+	public File getEvaluationFile(String name){
+		for (File file : file_list) {
+			System.out.println(file);
+			if(file.getAbsolutePath().endsWith(name))
+			return file;
+		}
+		throw new IllegalArgumentException("Ficheiro não existente na lista de ficheiros carregados.");
 	}
 	
 }

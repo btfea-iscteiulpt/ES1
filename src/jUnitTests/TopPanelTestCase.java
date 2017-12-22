@@ -1,4 +1,4 @@
-package gui_tests;
+package jUnitTests;
 
 import static org.junit.Assert.*;
 
@@ -15,13 +15,4 @@ public class TopPanelTestCase {
 		//Se for passada uma referência de user nula lança uma excepção. Para isto correr bem significa
 		//que o user dado é válido
 	}
-	
-	@Test
-	public void testTopPanel_null() {
-		new TopPanel(null);
-	//	assertEquals("TopPanel", 
-		//Se for passada uma referência de user nula lança uma excepção. Para isto correr bem significa
-		//que o user dado é válido
-	}
-
 }

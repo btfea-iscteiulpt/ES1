@@ -4,8 +4,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 import javax.swing.*;
 
@@ -25,9 +28,10 @@ private boolean editable;
 	 */
 	private static final long serialVersionUID = -5973344758120539378L;
 
-	private static Map<String, Integer> regras = new HashMap<String, Integer>();
+	private Map<String, Integer> regras = new HashMap<String, Integer>();
+	private UserMenu menu;
 	
-	public static Map<String, Integer> getRegras() {
+	public Map<String, Integer> getRegras() {
 		return regras;
 	}
 	
@@ -35,7 +39,10 @@ private boolean editable;
 	 * Construtor da classe ConfigPanel.
 	 * @param editable booleano que indica se a coluna de pesos poderá ser alterada.
 	 */
-	public ConfigPanel(boolean editable){
+	public ConfigPanel(boolean editable,UserMenu menu){
+		if(menu==null)
+			throw new IllegalArgumentException();
+		this.menu=menu;
 		this.editable=editable;
 	}
 	
@@ -69,8 +76,9 @@ private boolean editable;
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < table.getRowCount(); i++)
 					regras.put((String) table.getValueAt(i, 0), (int) table.getValueAt(i, 1));
-				fp.setText("FP = " + RulesEvaluation.FileScanner(new File("ham.log.txt")));
-				fn.setText("FN = " + RulesEvaluation.FileScanner(new File("spam.log.txt")));
+				fp.setText("FP = " + RulesEvaluation.FileScanner(menu.getEvaluationFile("ham.log"),ConfigPanel.this));
+				fn.setText("FN = " + RulesEvaluation.FileScanner(menu.getEvaluationFile("spam.log"),ConfigPanel.this));
+			//	updateRulesFile();
 			}
 		});
 		this.add(button);
@@ -91,5 +99,22 @@ private boolean editable;
 			return new JLabel(s);
 		}
 	
+	private void updateRulesFile(){
+		File f = menu.getEvaluationFile("rules.cf");
+		PrintWriter p=null;
+		try{
+			p=new PrintWriter(f);
+			for (String regra : regras.keySet()) {
+				p.println(regra+" "+regras.get(regra));
+				p.flush();
+			}		
+		}
+		catch(FileNotFoundException e){
+			System.out.println("ficheiro não encontrado.");
+		}
+		finally{
+			p.close();
+		}
+	}
 	
 }

@@ -12,7 +12,6 @@ public class AntiSpamFilterProblem extends AbstractDoubleProblem {
 	    // 10 variables (anti-spam filter rules) by default 
 	    this(10);
 	  }
-	  //oi
 	  public AntiSpamFilterProblem(Integer numberOfVariables) {
 	    setNumberOfVariables(numberOfVariables);
 	    setNumberOfObjectives(2);

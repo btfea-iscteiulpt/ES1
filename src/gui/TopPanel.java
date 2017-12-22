@@ -103,11 +103,9 @@ public class TopPanel extends JPanel {
 			if (!text.isEmpty()) {
 				File f = new File(text);
 				if (f.exists() && !f.isDirectory()) {
+					menu.getFile_list().add(f);
 					if (type == 0)
-						menu.fillTables(f);
-					else // convém verificar se acaba em spam.log ou ham.log
-							// para garantir que é o file correto
-						menu.getFile_list().add(f);
+						menu.fillTables(f);	
 					field.setEnabled(false);
 				} else
 					JOptionPane.showMessageDialog(menu.getFrame(), "Caminho especificado não encontrado.");

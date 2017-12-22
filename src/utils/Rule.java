@@ -5,6 +5,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+/**
+ * representa um par regra e o seu peso correspondente. (DEPRECATED)
+ *
+ */
 public class Rule {
 private Integer value;
 private String rule;
@@ -16,10 +20,18 @@ public Rule(String rule) {
 	this.rule=rule;
 }
 
+/**
+ * Getter para o nome da regra.
+ * @return nome da regra.
+ */
 public String getRule() {
 	return rule;
 }
 
+/**
+ * Getter para o peso da regra.
+ * @return peso da regra.
+ */
 public Integer getValue() {
 	return value;
 }

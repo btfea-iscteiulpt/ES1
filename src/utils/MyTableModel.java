@@ -2,6 +2,10 @@ package utils;
 
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Estrutura sobre as quais são feitas operações relacionadas com a tabela de configuração. Define os tipos de dados
+ * a serem utilizados, as colunas que podem ser alteradas, e o nome das colunas da tabela.
+ */
 public class MyTableModel extends DefaultTableModel {
 private boolean editable;
 	/**
